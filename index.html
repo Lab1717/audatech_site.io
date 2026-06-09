@@ -1051,12 +1051,30 @@
                     <div class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div><div class="contact-content"><h4>Email</h4><p>audatechitalia@gmail.com</p></div></div>
                     <div class="contact-item"><div class="contact-icon"><i class="fas fa-clock"></i></div><div class="contact-content"><h4>Orari</h4><p>Lun-Ven 9-19, Sab 9-13</p></div></div>
                 </div>
-                <div class="whatsapp-highlight">
+                <!-- <div class="whatsapp-highlight">
                     <a href="https://wa.me/393478575458?text=Ciao%20Audatech%2C%20vorrei%20un%20preventivo%20per%20una%20riparazione"
                        class="btn-whatsapp" target="_blank">
                         <i class="fab fa-whatsapp"></i> Scrivici su WhatsApp
                     </a>
-                </div>
+                </div> -->
+				<div class="whatsapp-highlight">
+    <a id="wa-highlight"
+       class="btn-whatsapp"
+       target="_blank">
+        <i class="fab fa-whatsapp"></i> Scrivici su WhatsApp
+    </a>
+</div>
+
+<script>
+(() => {
+    const num = "39" + "347" + "857" + "5458";
+
+    const msg = encodeURIComponent("Ciao Audatech, vorrei un preventivo per una riparazione");
+    const url = `https://wa.me/${num}?text=${msg}`;
+
+    document.getElementById("wa-highlight").href = url;
+})();
+</script>
             </div>
         </div>
     </section>
