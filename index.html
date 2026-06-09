@@ -789,9 +789,9 @@
     </style>
 </head>
 <body>
-
+<!-- 
     <!-- WHATSAPP FLOATING BUTTON -->
-    <a href="https://wa.me/393478575458?text=Salve%2C%20vorrei%20richiedere%20informazioni%20per%20una%20riparazione"
+    <!-- <a href="https://wa.me/393478575458?text=Salve%2C%20vorrei%20richiedere%20informazioni%20per%20una%20riparazione"
        class="whatsapp-float"
        target="_blank" rel="noopener noreferrer"
        aria-label="Contattaci su WhatsApp">
@@ -799,8 +799,31 @@
         <span class="whatsapp-circle">
             <i class="fab fa-whatsapp"></i>
         </span>
-    </a>
+    </a> -->
+ -->
+ <!-- WHATSAPP FLOATING BUTTON -->
+<a id="whatsapp-float"
+   class="whatsapp-float"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Contattaci su WhatsApp">
 
+    <span class="whatsapp-badge">Chatta con noi!</span>
+    <span class="whatsapp-circle">
+        <i class="fab fa-whatsapp"></i>
+    </span>
+</a>
+
+<script>
+(() => {
+    const num = "39" + "347" + "857" + "5458";
+
+    const msg = encodeURIComponent("Salve, vorrei richiedere informazioni per una riparazione");
+    const url = `https://wa.me/${num}?text=${msg}`;
+
+    document.getElementById("whatsapp-float").href = url;
+})();
+</script>
     <!-- Header -->
     <header>
         <div class="container header-container">
@@ -828,7 +851,7 @@
             <div class="hero-content">
                 <h1>Riparazioni Tecnologiche Professionali e Rapide</h1>
                 <p>Ripariamo smartphone, tablet, PC, stampanti 3D e altri dispositivi elettronici con componenti originali e garanzia estesa. Servizio rapido e conveniente con ritiro e consegna a domicilio.</p>
-                <div class="hero-buttons">
+                <!-- <div class="hero-buttons">
                     <a href="servizi.html" class="btn btn-accent">Scopri i Servizi</a>
                     <a href="https://wa.me/393478575458?text=Salve%2C%20vorrei%20richiedere%20una%20riparazione"
                        class="btn btn-outline"
@@ -836,7 +859,29 @@
                        target="_blank">
                         <i class="fab fa-whatsapp" style="margin-right: 8px;"></i> WhatsApp
                     </a>
-                </div>
+                </div> -->
+
+				<div class="hero-buttons">
+    <a href="servizi.html" class="btn btn-accent">Scopri i Servizi</a>
+
+    <a id="wa-btn"
+       class="btn btn-outline"
+       style="color: white; border-color: #25D366; background-color: #25D366;"
+       target="_blank">
+        <i class="fab fa-whatsapp" style="margin-right: 8px;"></i> WhatsApp
+    </a>
+</div>
+
+<script>
+(() => {
+    const num = "39" + "347" + "857" + "5458";
+    const msg = encodeURIComponent("Salve, vorrei richiedere una riparazione");
+
+    const link = `https://wa.me/${num}?text=${msg}`;
+
+    document.getElementById("wa-btn").href = link;
+})();
+</script>
                 <div class="hero-features">
                     <div class="hero-feature"><i class="fas fa-clock"></i><span>Riparazioni in 24-48 ore</span></div>
                     <div class="hero-feature"><i class="fas fa-shield-alt"></i><span>Garanzia 12 mesi</span></div>
@@ -977,7 +1022,32 @@
                 <p>Scrivici su WhatsApp per un preventivo immediato. Rispondiamo in pochi minuti!</p>
                 <div class="contact-details">
                     <div class="contact-item"><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><div class="contact-content"><h4>Laboratorio</h4><p>Via Adriatica, 17<br>60018 Montemarciano AN</p></div></div>
-                    <div class="contact-item"><div class="contact-icon"><i class="fas fa-phone-alt"></i></div><div class="contact-content"><h4>Telefono</h4><p>+39 3478575458</p></div></div>
+                    <!-- <div class="contact-item"><div class="contact-icon"><i class="fas fa-phone-alt"></i></div><div class="contact-content"><h4>Telefono</h4><p>+39 3478575458</p></div></div> -->
+					<div class="contact-item">
+    <div class="contact-icon">
+        <i class="fas fa-phone-alt"></i>
+    </div>
+
+    <div class="contact-content">
+        <h4>Telefono</h4>
+        <p>
+            <a id="phone-link"></a>
+        </p>
+    </div>
+</div>
+
+<script>
+(() => {
+    const p = ["+39", "347", "857", "5458"];
+
+    const display = p.join(" ");
+    const tel = p.join("");
+
+    const el = document.getElementById("phone-link");
+    el.textContent = display;
+    el.href = "tel:" + tel;
+})();
+</script>
                     <div class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div><div class="contact-content"><h4>Email</h4><p>audatechitalia@gmail.com</p></div></div>
                     <div class="contact-item"><div class="contact-icon"><i class="fas fa-clock"></i></div><div class="contact-content"><h4>Orari</h4><p>Lun-Ven 9-19, Sab 9-13</p></div></div>
                 </div>
@@ -1045,7 +1115,24 @@
                     <h3>Contatti</h3>
                     <ul class="footer-links">
                         <li><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Via Adriatica, 17, 60018 Montemarciano AN</li>
-                        <li><i class="fas fa-phone-alt" style="margin-right: 10px;"></i> +39 3478575458</li>
+                        <!-- <li><i class="fas fa-phone-alt" style="margin-right: 10px;"></i> +39 3478575458</li> -->
+						<li>
+						<i class="fas fa-phone-alt" style="margin-right:10px;"></i>
+						<a id="phone-link"></a>
+					</li>
+
+					<script>
+					const p1 = "+39";
+					const p2 = "347888888888f";
+					const p3 = "857";
+					const p4 = "5458";
+
+					const phone = `${p1}${p2}${p3}${p4}`;
+
+					const el = document.getElementById("phone-link");
+					el.textContent = `${p1} ${p2} ${p3} ${p4}`;
+					el.href = `tel:${phone}`;
+					</script>
 
                         <li>
            <li><i class="fas fa-envelope" style="margin-right: 10px;"></i> audatechitalia@gmail.com</li>
