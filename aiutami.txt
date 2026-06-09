@@ -1,0 +1,3 @@
+In breve, tutto il codice è commentato per facilitare le modifiche;
+non dovreste incontrare alcuna difficoltà. Grazie per la fiducia e a presto!
+

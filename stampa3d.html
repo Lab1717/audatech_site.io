@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Audatech Informatica: stampa 3D personalizzata, progettazione CAD e riparazione stampanti. Oggetti su misura in PLA, ABS, PETG. Preventivo gratuito, ritiro e consegna.">
+    <title>Stampa 3D, Progettazione e Riparazione Stampanti | Audatech Informatica</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #080d12;
+            --primary-dark: #003d82;
+            --primary-light: #e8f0fe;
+            --secondary: #ffffff;
+            --accent: #ff6b35;
+            --whatsapp: #25D366;
+            --whatsapp-dark: #1da851;
+            --text: #333333;
+            --text-light: #666666;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #e9ecef;
+            --gray-dark: #dee2e6;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --radius: 6px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            font-weight: 400;
+            background-color: #fff;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--dark);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent);
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 38px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1da851;
+            transform: translateY(-4px);
+            box-shadow: 0 14px 35px rgba(37, 211, 102, 0.5);
+        }
+
+        .btn-whatsapp i {
+            font-size: 1.8rem;
+        }
+
+        /* WHATSAPP FLOATING BUTTON */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9998;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            transform: translateY(-6px);
+        }
+        .whatsapp-float .whatsapp-badge {
+            background: white;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 10px 18px;
+            border-radius: 30px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+            pointer-events: none;
+        }
+        .whatsapp-float:hover .whatsapp-badge {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .whatsapp-float .whatsapp-circle {
+            width: 62px;
+            height: 62px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 6px 24px rgba(37,211,102,0.45);
+            transition: background 0.3s ease, transform 0.3s ease;
+            position: relative;
+            animation: whatsappBounce 2.5s ease-in-out infinite;
+        }
+        .whatsapp-float:hover .whatsapp-circle {
+            background: #1da851;
+            animation: none;
+            transform: scale(1.08);
+        }
+        .whatsapp-circle::after {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 3px solid rgba(37,211,102,0.35);
+            animation: whatsappRing 2.5s ease-in-out infinite;
+        }
+        @keyframes whatsappBounce {
+            0%,100%{transform:translateY(0);}
+            20%{transform:translateY(-8px);}
+            40%{transform:translateY(0);}
+            60%{transform:translateY(-5px);}
+            80%{transform:translateY(0);}
+        }
+        @keyframes whatsappRing {
+            0%,100%{transform:scale(1);opacity:0.5;}
+            50%{transform:scale(1.25);opacity:0;}
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            border-bottom: 1px solid var(--gray);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+        }
+        .logo {
+            display: block;
+            transition: transform 0.3s;
+            order: 0; /* Logo à gauche */
+        }
+
+        /* LOGO - TAILLE BEAUCOUP PLUS GRANDE */
+        .logo img {
+            height: 160px; /* Taille augmentée significativement */
+            width: auto;
+            display: block;
+            max-width: 450px; /* Largeur max augmentée */
+            object-fit: contain;
+        }
+
+        .logo:hover img {
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 768px) {
+            .logo img {
+                height: 100px; /* Plus grand aussi en mobile */
+            }
+            .header-container {
+                padding: 8px 0;
+                flex-wrap: wrap;
+            }
+            .logo {
+                flex: 1;
+            }
+        }
+        @media (max-width: 480px) {
+            .logo img {
+                height: 90px;
+            }
+        }
+
+        .nav-desktop {
+            display: flex;
+            list-style: none;
+            order: 1;
+        }
+        .nav-desktop li {
+            margin-left: 35px;
+        }
+        .nav-desktop a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-desktop a:hover {
+            color: var(--primary);
+        }
+        .nav-desktop a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #0056b3;
+            transition: width 0.3s;
+        }
+        .nav-desktop a:hover::after {
+            width: 100%;
+        }
+        .nav-cta {
+            background-color: var(--accent);
+            color: white !important;
+            padding: 10px 24px;
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+        .nav-cta:hover {
+            background-color: #e55a2b;
+            color: white;
+        }
+
+        /* Mobile toggle - à DROITE avec marge à gauche pour l'écarter du bord */
+        .mobile-toggle {
+            display: none;
+            order: 2; /* Placé à droite */
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+            margin-right: 15px; /* Décalage vers la gauche depuis le bord droit */
+            padding-left: 0;
+        }
+
+        /* MENU MOBILE (liens à gauche) */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+                margin-right: 5px; /* Un peu moins d'espace sur très petit écran */
+            }
+            .nav-desktop {
+                display: none;
+                position: absolute;
+                top: 100%; left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                padding: 0;
+                box-shadow: var(--shadow);
+                z-index: 999;
+                order: 3;
+            }
+            .nav-desktop.active {
+                display: flex;
+            }
+            .nav-desktop li {
+                margin: 0;
+                width: 100%;
+            }
+            .nav-desktop a {
+                display: block;
+                width: 100%;
+                padding: 15px 25px;
+                border-bottom: 1px solid #eee;
+                font-size: 1.1rem;
+                text-align: left;
+            }
+            .nav-desktop a.nav-cta {
+                background-color: var(--accent);
+                color: white !important;
+                text-align: center;
+                border-bottom: none;
+                margin: 10px 25px;
+                border-radius: var(--radius);
+                padding: 12px;
+            }
+        }
+
+        /* Hero specifico */
+        .page-hero {
+            padding: 220px 0 100px; /* Augmenté pour accommoder le plus grand logo */
+            background: linear-gradient(135deg, #002856 0%, #0056b3 100%);
+            color: white;
+            text-align: center;
+        }
+        .page-hero h1 {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 20px;
+        }
+        .page-hero p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        .hero-badge-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        .hero-badge {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(5px);
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .hero-badge i {
+            color: #00a8ff;
+        }
+
+        /* Gallery */
+        .gallery {
+            background-color: white;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .gallery-item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Description box */
+        .desc-section {
+            background: var(--light);
+        }
+        .desc-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .desc-box p {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+
+        /* Contact form */
+        .contact-form {
+            background: white;
+            padding: 32px;
+            border-radius: 28px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.05);
+            border: 1px solid #eef2ff;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .contact-form h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1e2f44;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #cfdfed;
+            border-radius: 18px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: 0.2s;
+            background: #fefefe;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0056b3;
+            box-shadow: 0 0 0 3px rgba(0,86,179,0.2);
+        }
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 28px;
+            justify-content: center;
+        }
+        .btn-whatsapp-form {
+            background: #25D366;
+            box-shadow: 0 4px 8px rgba(37,211,102,0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            transition: all 0.2s ease;
+        }
+        .btn-whatsapp-form:hover {
+            background: #1da851;
+            transform: translateY(-2px);
+        }
+        .btn-email {
+            background: #0056b3;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0,86,179,0.2);
+            transition: all 0.2s ease;
+        }
+        .btn-email:hover {
+            background: #003d82;
+            transform: translateY(-2px);
+        }
+        .info-note {
+            font-size: 0.8rem;
+            background: #eef4ff;
+            padding: 10px 16px;
+            border-radius: 60px;
+            margin-top: 24px;
+            text-align: center;
+            color: #0050aa;
+        }
+
+        /* Footer - SUPPRESSION DE L'IMAGE FOOTER */
+        .footer-image {
+            display: none; /* Complètement retiré */
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 0;
+        }
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: white;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #0056b3;
+        }
+        .footer-logo { display: flex; flex-direction: column; margin-bottom: 20px; }
+        .footer-logo h3 { font-size: 1.8rem; margin-bottom: 5px; }
+        .footer-logo span { font-size: 0.9rem; color: #adb5bd; letter-spacing: 1px; }
+        .footer-col p { color: #adb5bd; margin-bottom: 25px; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: #adb5bd; text-decoration: none; transition: color 0.3s; }
+        .footer-links a:hover { color: white; }
+        .social-links { display: flex; gap: 15px; margin-top: 20px; }
+        .social-links a {
+            width: 40px; height: 40px;
+            background-color: #343a40;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .social-links a:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+        .copyright {
+            text-align: center;
+            padding: 30px 20px;
+            border-top: 1px solid #343a40;
+            color: #adb5bd;
+            font-size: 0.9rem;
+            background-color: var(--dark);
+            margin-top: 20px; /* Petit espace au-dessus du copyright */
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-hero { padding: 180px 0 80px; /* Ajusté pour mobile */ }
+            .page-hero h1 { font-size: 2.2rem; }
+            .btn-group { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- WhatsApp float -->
+    <a href="https://wa.me/393478575458?text=Salve%2C%20vorrei%20informazioni%20sulla%20stampa%203D%20e%20riparazioni"
+       class="whatsapp-float"
+       target="_blank" rel="noopener noreferrer"
+       aria-label="Contattaci su WhatsApp">
+        <span class="whatsapp-badge">Chatta con noi!</span>
+        <span class="whatsapp-circle">
+            <i class="fab fa-whatsapp"></i>
+        </span>
+    </a>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <!-- Logo à gauche -->
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Audatech Informatica">
+            </a>
+            <!-- Menu hamburger à DROITE avec espacement -->
+            <div class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-desktop" id="navDesktop">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="servizi.html" style="color:var(--accent); font-weight:600;">Servizi</a></li>
+                <li><a href="index.html#punti-forza">Punti di Forza</a></li>
+                <li><a href="index.html#chi-siamo">Chi Siamo</a></li>
+                <li><a href="index.html#contatti" class="nav-cta">Contattaci</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>🖨️ Stampa 3D, Progettazione e Riparazione Stampanti</h1>
+            <p>Oggetti unici su misura, prototipazione rapida e assistenza completa su stampanti 3D. <strong>Preventivo gratuito e consegna veloce.</strong></p>
+            <div class="hero-badge-group">
+                <div class="hero-badge"><i class="fas fa-print"></i> PLA, ABS, PETG</div>
+                <div class="hero-badge"><i class="fas fa-cogs"></i> Riparazione tutte le marche</div>
+                <div class="hero-badge"><i class="fas fa-cube"></i> Progettazione CAD</div>
+            </div>
+            <a href="https://wa.me/393478575458?text=Ciao%20Audatech%2C%20vorrei%20un%20preventivo%20per%20stampa%203D%20o%20riparazione%20stampante" class="btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i> Richiedi un preventivo
+            </a>
+        </div>
+    </section>
+
+    <!-- Gallery con immagini reali -->
+    <section class="gallery section-padding">
+        <div class="container">
+            <div class="section-title">
+                <h2>I nostri lavori</h2>
+                <p>Stampe professionali, prototipi e riparazioni di precisione</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://cdn.artec3d.com/content-hub-images/how-does-a-3d-printer-work-01.jpg" alt="Stampa 3D personalizzata">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://www.innovationpost.it/wp-content/uploads/2024/10/stampa-3D.jpg" alt="Progettazione CAD">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://artwoodacademy.it/wp-content/uploads/2024/10/stampa3d.jpg" alt="Riparazione stampante 3D">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Descrizione servizi -->
+    <section class="desc-section section-padding">
+        <div class="container">
+            <div class="desc-box">
+                <p><strong>✨ Oggetti unici su misura</strong> – Realizziamo componenti, prototipi, oggetti decorativi e ricambi in PLA, ABS, PETG, TPU e materiali speciali. Su richiesta, modelliamo il tuo progetto 3D da zero o partendo da un'idea.</p>
+                <p><strong>🔧 Riparazione professionale stampanti 3D</strong> – Assistenza su tutte le marche: sostituzione ugelli, piani riscaldanti, cinghie, estrusori, schede madri, calibrazione e firmware. Ritiro e riconsegna rapidi.</p>
+                <p><strong>📐 Servizi extra</strong> – Scannerizzazione 3D, reverse engineering, post-produzione (levigatura, assemblaggio) e manutenzione periodica delle stampanti.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form contatto -->
+    <section class="section-padding" style="background: var(--light);">
+        <div class="container">
+            <div class="contact-form">
+                <h2>✉️ Richiedi preventivo gratuito</h2>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="nome">Nome e cognome</label>
+                        <input type="text" id="nome" placeholder="Mario Rossi" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="tuo@esempio.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="messaggio">Descrivi il progetto o il guasto (stampa, progettazione o riparazione)</label>
+                        <textarea id="messaggio" rows="4" placeholder="Es: ho bisogno di un pezzo personalizzato per ... / la mia stampante non estrude ..." required></textarea>
+                    </div>
+
+                    <div class="btn-group">
+                        <a href="#" class="btn-whatsapp-form" id="whatsappBtn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Contatta su WhatsApp
+                        </a>
+                        <a href="#" class="btn-email" id="emailBtn">
+                            <i class="fas fa-envelope"></i> Invia richiesta via Email
+                        </a>
+                    </div>
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i> Compila i campi: i pulsanti si aggiorneranno automaticamente con i tuoi dati.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA finale -->
+    <section class="section-padding" style="background: white; text-align: center;">
+        <div class="container">
+            <h2 style="font-size: 2rem; margin-bottom: 20px;">Pronto a dare forma alle tue idee?</h2>
+            <p style="margin-bottom: 35px; color: var(--text-light);">Contattaci subito su WhatsApp per un preventivo senza impegno.</p>
+            <a href="https://wa.me/393478575458?text=Ciao%20Audatech%2C%20vorrei%20richiedere%20un%20preventivo%20per%20stampa%203D" class="btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i> Scrivici ora
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <h3>Audatech Informatica</h3>
+                        <span>Riparazioni Professionali</span>
+                    </div>
+                    <p>Ripariamo smartphone, tablet, PC e dispositivi elettronici con componenti di qualità e garanzia estesa.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/audatech_marina?igsh=eDBsdjBocjh6OA==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Link Utili</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="servizi.html">Servizi</a></li>
+                        <li><a href="index.html#punti-forza">Punti di Forza</a></li>
+                        <li><a href="index.html#chi-siamo">Chi Siamo</a></li>
+                        <li><a href="index.html#contatti">Contatti</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Servizi</h3>
+                    <ul class="footer-links">
+                        <li><a href="riparazione-smartphone.html">Riparazione Smartphone</a></li>
+                        <li><a href="riparazione-pc.html">Riparazione PC & Laptop</a></li>
+                        <li><a href="stampa3d.html">Stampa 3D Personalizzata</a></li>
+                        <li><a href="interventi-domicilio.html">Riparazione a Domicilio</a></li>
+                        <li><a href="recupero-dati.html">Recupero Dati</a></li>
+                        <li><a href="assistenza-remoto.html">Assistenza da Remoto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contatti</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Via Adriatica, 17, 60018 Montemarciano AN</li>
+                        <li><i class="fas fa-phone-alt" style="margin-right: 10px;"></i> +39 3478575458</li>
+                        <li><i class="fas fa-envelope" style="margin-right: 10px;"></i> audatechitalia@gmail.com</li>
+                     <!--  
+                        <li>
+                      <i class="fas fa-clock" style="margin-right: 10px;"></i>
+                      Lun-Ven 9-19, Sab 9-13
+                    </li> a cambiare qui orario --></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <div class="container">
+                <p>&copy; 2026 Audatech Informatica. Tutti i diritti riservati. | P.IVA 02823020421</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ========== DATI DI CONTATTO ==========
+        const WHATSAPP_NUMBER = '393478575458';
+        const EMAIL_ADDRESS = 'audatechitalia@gmail.com';
+
+        const form = document.getElementById('contactForm');
+        const nomeInput = document.getElementById('nome');
+        const emailInput = document.getElementById('email');
+        const messaggioInput = document.getElementById('messaggio');
+        const whatsappBtn = document.getElementById('whatsappBtn');
+        const emailBtn = document.getElementById('emailBtn');
+
+        function buildWhatsAppText() {
+            let nome = nomeInput.value.trim();
+            let email = emailInput.value.trim();
+            let messaggio = messaggioInput.value.trim();
+
+            if (!nome && !email && !messaggio) {
+                return "Salve, vorrei maggiori informazioni sulla stampa 3D e riparazione stampanti. Potete aiutarmi?";
+            }
+
+            let intro = `*Richiesta da:* ${nome || '(Nome non inserito)'}`;
+            if (email) intro += `\n*Email:* ${email}`;
+            let corpo = `\n\n📋 *Dettaglio richiesta:*\n${messaggio || '(Nessun dettaglio scritto)'}`;
+            let servizio = "\n\n🔧 *Servizio: Stampa 3D / Progettazione / Riparazione stampanti*";
+            return encodeURIComponent(intro + corpo + servizio);
+        }
+
+        function buildMailToLink() {
+            let nome = nomeInput.value.trim();
+            let email = emailInput.value.trim();
+            let messaggio = messaggioInput.value.trim();
+
+            let subject = `Richiesta preventivo Stampa 3D - ${nome || 'Nuovo cliente'}`;
+            let body = `Ciao,\n\nRichiedo informazioni per:\n`;
+            body += `- Nome: ${nome || '(non indicato)'}\n`;
+            body += `- Email contatto: ${email || '(non indicata)'}\n\n`;
+            body += `Dettaglio richiesta:\n${messaggio || '(nessun dettaglio aggiunto)'}\n\n`;
+            body += `--\nInviato dal modulo Stampa 3D Audatech`;
+            return `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        function updateLinks() {
+            whatsappBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${buildWhatsAppText()}`;
+            emailBtn.href = buildMailToLink();
+        }
+
+        form.addEventListener('input', updateLinks);
+        form.addEventListener('change', updateLinks);
+        window.addEventListener('DOMContentLoaded', () => {
+            updateLinks();
+            setTimeout(updateLinks, 200);
+        });
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert("Usa i pulsanti WhatsApp o Email per inviare la tua richiesta.");
+        });
+
+        emailBtn.addEventListener('click', (e) => {
+            if (!emailInput.value.trim() || !nomeInput.value.trim()) {
+                if (!confirm("Non hai inserito nome o email. Il messaggio partirà anonimo. Vuoi continuare?")) {
+                    e.preventDefault();
+                }
+            }
+        });
+
+        whatsappBtn.addEventListener('click', (e) => {
+            if (!messaggioInput.value.trim() && !nomeInput.value.trim()) {
+                if (!confirm("Il messaggio WhatsApp non contiene dettagli specifici. Vuoi inviare comunque una richiesta generica?")) {
+                    e.preventDefault();
+                }
+            }
+        });
+
+        // Mobile menu
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navDesktop = document.getElementById('navDesktop');
+        mobileToggle.addEventListener('click', () => {
+            navDesktop.classList.toggle('active');
+            const icon = mobileToggle.querySelector('i');
+            if (navDesktop.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Fermer le menu en cliquant à l'extérieur
+        document.addEventListener('click', function(event) {
+            if (!navDesktop.contains(event.target) && !mobileToggle.contains(event.target) && navDesktop.classList.contains('active')) {
+                navDesktop.classList.remove('active');
+                const icon = mobileToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Smooth scroll per ancore interne
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    if (navDesktop.classList.contains('active')) {
+                        navDesktop.classList.remove('active');
+                        mobileToggle.querySelector('i').classList.add('fa-bars');
+                        mobileToggle.querySelector('i').classList.remove('fa-times');
+                    }
+                    window.scrollTo({
+                        top: target.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Sticky header shadow
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            header.style.boxShadow = window.scrollY > 50 
+                ? '0 4px 12px rgba(0, 0, 0, 0.1)' 
+                : '0 2px 10px rgba(0, 0, 0, 0.08)';
+        });
+    </script>
+</body>
+</html>
