@@ -45,6 +45,7 @@
             color: var(--dark);
         }
 
+        /* h2fix */
         .hero-content h2 {
         color: white;
         }
