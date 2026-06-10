@@ -1,4 +1,4 @@
-<style>
+
         :root {
             --primary: #080d12;
             --primary-dark: #003d82;
@@ -776,4 +776,3 @@
         @media (max-width: 480px) {
             .contact-details { grid-template-columns: 1fr; }
         }
-    </style>
